@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-//not solve still 
+//name: CONSEC - Consecutive Letters
 //link: https://www.spoj.com/problems/CONSEC/
 struct UFDS{
     vector<int>p,s;
@@ -43,26 +43,28 @@ void solve(){
         if(a==2)cx[b]='#';
     }
     reverse(vp.begin(),vp.end());
-    map<char,int> maximos;
     for(int i=1;i<x.size();i++){
-        maximos[cx[i]]=max(maximos[cx[i]],1);
-        if(cx[i]==cx[i-1]){
+        if(cx[i]==cx[i-1] and cx[i]!='#'){
             s.UnionSet(i,i-1);
-            maximos[cx[i]]=max(maximos[cx[i]],s.siz(i));
         }
     }
     stack<int> ans;
+    //cerr<<cx<<endl;
     for(auto i:vp){
+        //cerr<<i.first<<" "<<i.second<<endl;
         if(i.first==1){
-            ans.push(maximos[x[i.second]]);
+            //cerr<<"ans: "<<maximos[x[i.second]]<<endl;
+            ans.push(s.siz(i.second));
         }else{
-            if(i.second-1>=0 and x[i.second]==x[i.second-1]){
+            //cerr<<x<<endl;
+            cx[i.second]=x[i.second];
+            if(i.second-1>=0 and cx[i.second]==cx[i.second-1]){
+                //cerr<<"entro 1"<<endl;
                 s.UnionSet(i.second,i.second-1);
-                maximos[x[i.second]]=max(maximos[x[i.second]],s.siz(i.second));
             }
-            if(i.second+1<x.size() and x[i.second]==x[i.second+1]){
+            if(i.second+1<x.size() and cx[i.second]==cx[i.second+1]){
+                //cerr<<"entro 2"<<endl;
                 s.UnionSet(i.second,i.second+1);
-                maximos[x[i.second]]=max(maximos[x[i.second]],s.siz(i.second));
             }
         }
     }
@@ -70,16 +72,18 @@ void solve(){
         cout<<ans.top()<<"\n";
         ans.pop();
     }
+    
 }
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     int t;
     cin>>t;
+    int i=1;
     while(t--){
-        cout
+        cout<<"Case "<<i<<":\n";
         solve();
+        i++;
     } 
-        
     return 0;
 }
