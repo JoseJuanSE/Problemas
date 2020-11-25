@@ -3,11 +3,11 @@
 class Solution {
 public:
     struct tri{
-      int d;  
-      vector<int> a;
-      const bool operator<(const tri &a)const{
-          return d<a.d;
-      }
+    int d;  
+    vector<int> a;
+    const bool operator<(const tri &a)const{
+            return d<a.d;
+    }
     };
     int distance(int a,int b){
         return a*a+b*b;
