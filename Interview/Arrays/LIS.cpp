@@ -11,20 +11,18 @@ public:
         
         for(int i=1;i<nums.size();i++){
             bool nins=true;
-
             int j = upper_bound(top.begin(),top.end(),nums[i])-top.begin();
             if(j==top.size() and top[j-1]==nums[i])j--;
             while(j-1>=0 and top[j-1]==nums[i])j--;
             if(j<top.size() and nums[i]<=top[j]){
-                 top[j]=nums[i];
-                 size[j]++;
-                 nins=false;
+                top[j]=nums[i];
+                size[j]++;
+                nins=false;
             }
             if(nins){
                 top.push_back(nums[i]);
                 size.push_back(1);
             }   
-            cout<<endl;
         }
         return top.size();
     }
