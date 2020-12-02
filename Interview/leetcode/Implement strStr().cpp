@@ -3,28 +3,20 @@
 class Solution {
 public:
     int KMP(string &a,string &b){
-        vector<int> lps(a.size(),0);
-        int beg=0,j=0;
+        vector<int> pi(a.size(),0);
+        int j=0;
         for(int i=1;i<a.size();i++){
-            if(a[beg]==a[i]){beg++;lps[i]=beg;}
-            else if(beg!=0){beg = lps[beg-1];i--;}
+            if(a[i]==a[j]){j++;pi[i]=j;}
+            else if(j!=0){j=pi[j-1];i--;}
         }
+        j=0;
         for(int i=0;i<b.size();i++){
             if(a[j]==b[i]){
                 j++;
-                if(j==a.size()){
-                    j--;
-                    return i-a.size()+1;
-                    bool f = true;
-                    while(j!=0 and (a[j]!=b[i] or f)){
-                        j = lps[j-1];
-                        f=false;
-                    }
-                    i--;
-                }
+                if(j==a.size())return i-a.size()+1;
             }else{
                 bool f = false;
-                while(j!=0 and a[j]!=b[i]){ j = lps[j-1];f=true;}
+                while(j!=0 and a[j]!=b[i]){j=pi[j-1];f=true;}
                 if(f)i--;
             }
         }
