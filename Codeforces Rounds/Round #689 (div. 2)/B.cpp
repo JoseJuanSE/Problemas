@@ -27,11 +27,55 @@ typedef vector<int> vi;
 typedef vector<vector<int> > vvi;
 typedef vector<ll> vl;
 typedef vector<ii> vii;
-
-void solve(){
-    int n,m;
+char mapa[502][502];
+int a1[502][502];
+int a2[502][502];
+int n,m;
+int checktree(int y,int x,int an){
+    if(y>=n or an>a1[y][x])return 1;
+    return checktree(y+1,x,an+2)+1;
+}
+void solve(){    
     cin>>n>>m;
-    
+    forn(i,n){
+        forn(j,m){
+            cin>>mapa[i][j];
+            a1[i][j]=0;
+            a2[i][j]=0;
+        }
+    }
+    forn(i,n){
+        forn(j,m){
+            if(mapa[i][j]=='*')a1[i][j]++;
+            if(j>0 and mapa[i][j-1]=='*')a1[i][j]+=a1[i][j-1];
+        }
+    }
+    forn(i,n){
+        for(int j=m-1;j>=0;j--){
+            if(mapa[i][j]=='*')a2[i][j]++;
+            if(j<m-1 and mapa[i][j+1]=='*')a2[i][j]+=a2[i][j+1];
+        }
+    }
+    forn(i,n){
+        forn(j,m){
+            if(mapa[i][j]=='*'){
+                bool xd= a1[i][j]-1 and a2[i][j]-1;
+                a1[i][j]=min(a1[i][j],a2[i][j]);
+                if(xd)a1[i][j]++;
+            }
+            cout<<a1[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    int ans = 0;
+    forn(i,n){
+        forn(j,m){
+            if(a1[i][j]){
+                ans += checktree(i,j,1);
+            }
+        }
+    }
+    cout<<ans<<endl;
 }
 int main(){
     fast

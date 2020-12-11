@@ -30,7 +30,13 @@ typedef vector<ii> vii;
 
 void solve(){
     int n,m;
-    cin>>n>>m;
+    cin>>n;
+    cin>>m;
+    forn(i,m)cout<<'a';
+    forn(i,n-m){
+        cout<<char('a'+(i+1)%3);
+    }
+    cout<<endl;
     
 }
 int main(){

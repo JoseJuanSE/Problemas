@@ -10,7 +10,7 @@
 #define UNIQUE(v) (v).resize(unique(ALL(v))-(v).begin())
 #define forn(i,n) for (int i = 0; i < n; i++)
 #define forr(i,a,b) for (int i = a; i <= b; i++)
-#define bs(v,f) binary_search(ALL(v),f)
+#define bse(v,f) binary_search(ALL(v),f)
 #define lb(v,f) lower_bound(ALL(v),f)
 #define ub(v,f) upper_bound(ALL(v),f)
 #define pb push_back
@@ -28,10 +28,47 @@ typedef vector<vector<int> > vvi;
 typedef vector<ll> vl;
 typedef vector<ii> vii;
 
-void solve(){
-    int n,m;
-    cin>>n>>m;
+vl s;
+vl a;
+ll n,m,x;
+set<ll>ps;
+
+void divi(ll ini,ll fin){
+    ll ss;
+    if(ini!=0)ss=s[fin]-s[ini-1];
+    else ss=s[fin];
+    ps.insert(ss);
+
+    if(a[ini]==a[fin]){
+        return;
+    }
     
+    x = (a[fin]+a[ini])/2;
+    ll pos = upper_bound(a.begin()+ini,a.begin()+fin,x)-a.begin();
+    divi(ini,pos-1);
+    divi(pos,fin);
+}
+void solve(){
+    cin>>n>>m;
+    a.assign(n,0);
+    forn(i,n)cin>>a[i];
+    sort(ALL(a));
+    s.assign(n,0);
+    s[0]=a[0];
+    forr(i,1,n-1){
+        s[i]+=a[i]+s[i-1];
+    }
+    ps.clear();
+    divi(0,n-1);
+    forn(i,m){
+        int x;
+        cin>>x;
+        if(ps.find(x)!=ps.end()){
+            cout<<"Yes"<<endl;
+        }else{
+            cout<<"No"<<endl;
+        }
+    }
 }
 int main(){
     fast
