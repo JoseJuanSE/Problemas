@@ -6,27 +6,38 @@
 
 using namespace std;
 
-int ma[503][503],n,m,t;
+int ma[503][503],n,m,t,c;
+char ca[503][503];
 int f(int i,int j,int cnum){
     if(i>n or ma[i][j]<cnum)return 0;
     return f(i+1,j,cnum+2)+1;
 }
 void solve(){
-    char x;
     cin>>n>>m;
     forr(i,1,n)
         forr(j,1,m)
-            cin>>x,ma[i][j]=(x=='*');
+            cin>>ca[i][j],ma[i][j]=(ca[i][j]=='*');
     forr(i,1,n)
         forr(j,2,m)
             ma[i][j] += ma[i][j] != 0? ma[i][j-1]:0;
+    forr(i,1,n){
+        c=0;
+        for(int j=m;j>0;j--){
+            if(ca[i][j]!='*'){
+                c=0;
+            }else{
+                c++;
+                ma[i][j] = min(c,ma[i][j]);
+            }
+        }
+    }
     forr(i,1,n)
-        for(int j=m-1;j>0;j--)
-            ma[i][j] = (ma[i][j]!=0 and ma[i][j+1]>ma[i][j])?ma[i][j+1]:ma[i][j];
+        forr(j,1,m)
+            ma[i][j] = ma[i][j]!=0?2*ma[i][j]-1:0;
     int ans=0;
     forr(i,1,n)
         forr(j,1,m)
-            ans+= ma[i][j]?f(i,j,1):0;
+            ans+= ma[i][j]>0?f(i,j,1):0;
     cout<<ans<<endl;
 }
 int main(){
