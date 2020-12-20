@@ -29,8 +29,30 @@ typedef vector<ll> vl;
 typedef vector<ii> vii;
 
 void solve(){
-    int n,m;
+    int n;
     cin>>n;
+    vi a(n);
+    forn(i,n)cin>>a[i];
+    int ans = 1,cs=0;
+    forr(i,0,n-2){
+        cs+=a[i];
+        int sets = 1,j=i+1,sum=0;
+        while(j<n){
+            sum+=a[j];
+            if(sum>cs){
+                sets=1;
+                break;
+            }else if(sum==cs){
+                sets++;
+                sum=0;
+            }
+            j++;
+        }
+        if(sum!=0)sets=0;
+        ans = max(ans,sets); 
+    }
+    //saca operaciones de conjuntos
+    cout<<n-ans<<endl;
 }
 int main(){
     fast

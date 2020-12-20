@@ -29,17 +29,29 @@ typedef vector<ll> vl;
 typedef vector<ii> vii;
 
 void solve(){
-    int n,m=0,k=1;
-    cin>>n;
-    vi a(n);
-    forn(i,n)cin>>a[i];
-    int ini=0,fin=n-1;
-    while(ini<fin){
-        cout<<a[ini]<<" "<<a[fin]<<" ";
-        ini++;fin--;
+    ll n,m;
+    cin>>n>>m;
+    bool ans=false;
+    ll r=n,ra=0;
+    if(n>m){
+        while(r>m and (r%2 == 0 or r%4 ==0 or r%8 == 0))
+        {
+            ra++;
+            r>>=1;
+        }
+    }else
+    {
+        while(r<m)
+        {
+            ra++;
+            r<<=1;
+        }
     }
-    if(ini==fin)cout<<a[ini]<<" ";    
-    cout<<endl;
+    ans = (r==m);
+    ll  res = ra/3;
+    res += (ra%3 != 0)?1:0;
+    if(ans)cout<<res<<endl;
+    else cout<<-1<<endl;
 }
 int main(){
     fast

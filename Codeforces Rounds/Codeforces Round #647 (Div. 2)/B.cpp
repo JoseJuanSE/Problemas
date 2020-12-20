@@ -29,17 +29,24 @@ typedef vector<ll> vl;
 typedef vector<ii> vii;
 
 void solve(){
-    int n,m=0,k=1;
+    int n,m;
     cin>>n;
     vi a(n);
     forn(i,n)cin>>a[i];
-    int ini=0,fin=n-1;
-    while(ini<fin){
-        cout<<a[ini]<<" "<<a[fin]<<" ";
-        ini++;fin--;
+    multiset<int> xd;
+    forn(i,n)xd.insert(a[i]);
+    int fans = -1;
+    for(int ans = 1;ans<1025;ans++){
+        multiset<int> s;
+        forn(i,n){
+            s.insert(a[i] ^ ans);
+        }
+        if(s==xd){
+            fans = ans;
+            break;
+        }
     }
-    if(ini==fin)cout<<a[ini]<<" ";    
-    cout<<endl;
+    cout<<fans<<endl;
 }
 int main(){
     fast

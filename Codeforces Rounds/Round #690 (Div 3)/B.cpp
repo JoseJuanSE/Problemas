@@ -31,6 +31,14 @@ typedef vector<ii> vii;
 void solve(){
     int n,m;
     cin>>n;
+    str s;
+    cin>>s;
+    if(s[0]=='2' and s[1]=='0' and s[s.size()-1]=='0' and s[s.size()-2]=='2')cout<<"YES"<<endl;
+    else if(s[0]=='2' and s[1]=='0' and s[3]=='0' and s[2]=='2')cout<<"YES"<<endl;
+    else if(s[s.size()-4]=='2' and s[s.size()-3]=='0' and s[s.size()-1]=='0' and s[s.size()-2]=='2')cout<<"YES"<<endl;
+    else if(s[0]=='2' and s[s.size()-3]=='0' and s[s.size()-1]=='0' and s[s.size()-2]=='2')cout<<"YES"<<endl;
+    else if(s[0]=='2' and s[1]=='0' and s[s.size()-1]=='0' and s[2]=='2')cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }
 int main(){
     fast

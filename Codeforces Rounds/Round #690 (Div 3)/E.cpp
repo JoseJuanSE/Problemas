@@ -14,6 +14,7 @@
 #define lb(v,f) lower_bound(ALL(v),f)
 #define ub(v,f) upper_bound(ALL(v),f)
 #define pb push_back
+#define MOD int(1e9)+7;
 
 using namespace std;
 
@@ -27,10 +28,27 @@ typedef vector<int> vi;
 typedef vector<vector<int> > vvi;
 typedef vector<ll> vl;
 typedef vector<ii> vii;
-
+int com(int x){
+    
+}
 void solve(){
-    int n,m;
-    cin>>n;
+    int n,m,k;
+    //m -> range size
+    //k -> max - min <= k
+    cin>>n>>m>>k;
+    vi a(n);
+    forn(i,n)cin>>a[i];
+    sort(ALL(a));
+    ll ans = 0;
+    int ini=0,fin=k-1;
+    while(fin<n){
+        if(a[fin]-a[ini]<=k){
+            fin++;
+        }else{
+            ans+=com(fin-ini+1);
+        }
+    }
+    cout<<ans%MOD;
 }
 int main(){
     fast

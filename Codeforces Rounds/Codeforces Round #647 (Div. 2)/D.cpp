@@ -14,7 +14,6 @@
 #define lb(v,f) lower_bound(ALL(v),f)
 #define ub(v,f) upper_bound(ALL(v),f)
 #define pb push_back
-
 using namespace std;
 
 typedef long long ll;
@@ -28,23 +27,16 @@ typedef vector<vector<int> > vvi;
 typedef vector<ll> vl;
 typedef vector<ii> vii;
 
+
 void solve(){
-    int n,m=0,k=1;
+    ll n,s=0,x=1;
     cin>>n;
-    vi a(n);
-    forn(i,n)cin>>a[i];
-    int ini=0,fin=n-1;
-    while(ini<fin){
-        cout<<a[ini]<<" "<<a[fin]<<" ";
-        ini++;fin--;
-    }
-    if(ini==fin)cout<<a[ini]<<" ";    
-    cout<<endl;
+    
 }
 int main(){
     fast
     int t=1;
-    cin>>t;
+    cin>>t; 
     while(t--)
         solve();
     return 0;
