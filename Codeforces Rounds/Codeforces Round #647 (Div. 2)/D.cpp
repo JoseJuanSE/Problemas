@@ -29,8 +29,9 @@ typedef vector<ii> vii;
 
 
 void solve(){
-    ll n,s=0,x=1;
-    cin>>n;
+    ll n,m;
+    cin>>n>>m;
+    
     
 }
 int main(){
