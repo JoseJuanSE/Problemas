@@ -86,7 +86,7 @@ str s;
 void solve(){
     ll n,p=0;
     cin>>n>>s;
-    vi nums;
+    vl nums;
     forn(i,n){
         if(s[i]=='*'){
             nums.push_back(i);
@@ -96,8 +96,8 @@ void solve(){
         cout<<0<<endl;
         return;
     }
-    int m = nums[SZ(nums)/2];    
-    int c1=0,c2=0,ans=0;
+    ll m = nums[SZ(nums)/2];    
+    ll c1=0,c2=0,ans=0;
     forr(i,m,n-1){
         if(s[i]=='*'){
             ans+=c1;
